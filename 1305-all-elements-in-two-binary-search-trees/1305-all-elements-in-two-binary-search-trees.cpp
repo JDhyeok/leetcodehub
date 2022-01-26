@@ -9,16 +9,39 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+// class Solution {
+// public:
+//     priority_queue<int, vector<int>, greater<int>> pq;
+//     vector<int> answer;
+    
+//     void addElement(TreeNode* root){
+//         if(root == NULL)
+//             return;
+//         addElement(root->left);
+//         pq.push(root->val);
+//         addElement(root->right);
+//     }
+    
+//     vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+//         addElement(root1);
+//         addElement(root2);
+
+//         while(!pq.empty()){
+//             answer.push_back(pq.top());
+//             pq.pop();
+//         }
+//         return answer;
+//     }
+// };
 class Solution {
 public:
-    priority_queue<int, vector<int>, greater<int>> pq;
     vector<int> answer;
     
     void addElement(TreeNode* root){
         if(root == NULL)
             return;
         addElement(root->left);
-        pq.push(root->val);
+        answer.push_back(root->val);
         addElement(root->right);
     }
     
@@ -26,10 +49,7 @@ public:
         addElement(root1);
         addElement(root2);
 
-        while(!pq.empty()){
-            answer.push_back(pq.top());
-            pq.pop();
-        }
+        sort(answer.begin(), answer.end());
         return answer;
     }
 };
